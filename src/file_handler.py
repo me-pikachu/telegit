@@ -57,6 +57,10 @@ def getfilename_withoutext(file_path: str):
     fname = os.path.basename(file_path)
     return (fname.split("."))[0]
 
+def getfilext(file_path: str):
+    filename = getfilename(file_path)
+    return filename.split(".")[1]
+
 def get_gitfolder(startdir: str, file_path: str):
     dir = os.path.dirname(file_path)
     dir.replace(startdir,"")
