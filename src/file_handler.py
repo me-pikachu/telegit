@@ -74,7 +74,7 @@ def get_gitfolder(startdir: str, file_path: str):
     return dir
 
 def get_gitloc(startdir: str, file_path: str):
-    return f"{get_gitfolder(file_path)}\\{getfilename(file_path)}"
+    return f"{get_gitfolder(startdir, file_path)}\\{getfilename(file_path)}"
 
 def getsubdir(curdir: str):
     # using scandir
