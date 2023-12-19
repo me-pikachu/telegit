@@ -63,7 +63,7 @@ def getfilext(file_path: str):
 
 def get_gitfolder(startdir: str, file_path: str):
     dir = os.path.dirname(file_path)
-    dir.replace(startdir,"")
+    dir = dir.replace(startdir,"")
     if (dir != ""): # if this condition is not checked then dir[0] may give errors
         if (dir[0] == '\\' or dir[0] == '/'):
             dir = dir[1:] # remove the first character of the string

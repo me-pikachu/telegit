@@ -182,6 +182,7 @@ def force_push_file(startdir: str, file_path: str, git: dict, max_fsize: int):
     print(f"Forcefully pushing the file '.\\{git_path}'")
 
     cursize = file_handler.getsize(file_path)
+
     if (cursize > max_fsize):
         print(f"The size of the file is greater than {max_fsize/(1024*1024)}MB\nPreparing file for Telegram upload")
         # uploading the file for Telegram
@@ -308,4 +309,4 @@ git = {
     "repo" : "me-pikachu/telegit",
     "desc" : "Trying to push with the script"
 }
-push(f"{currentdir}/test/test_dir",git)
+push(f"{currentdir}\\test\\test_dir",git)
