@@ -32,7 +32,7 @@ def togit(path: str, folder, filename: str, gitoken: str, repo: str, desc: str):
             repo.create_file(f'{filename}', desc, data, branch='main')
     print(f'pushed {filename} successfully!!')
 
-togit("E:/telegit/gitfuncs.py", 'src', 'gitfuncs.py', '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', 'me-pikachu/telegit', 'git related funcs')
+# togit("E:/telegit/gitfuncs.py", 'src', 'gitfuncs.py', '<YOUR TOKEN>', 'me-pikachu/telegit', 'git related funcs')
 
 def fromgit(**args):
     pass
