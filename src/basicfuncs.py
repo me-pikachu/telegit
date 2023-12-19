@@ -1,7 +1,4 @@
 from github import Github
-from pydrive.drive import GoogleDrive
-from pydrive.auth import GoogleAuth
-
 def togit(path: str, folder, filename: str, gitoken: str, repo: str, desc: str):
     app = Github(gitoken)
 
@@ -33,31 +30,4 @@ def togit(path: str, folder, filename: str, gitoken: str, repo: str, desc: str):
             repo.create_file(f'{filename}', desc, data, branch='main')
     print(f'pushed {filename} successfully!!')
 
-togit("E:/gitdrive/basicfuncs.py", 'src', 'basicfuncs.py', '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', 'me-pikachu/gitdrive', 'updated todrive')
-
-def todrive(path: str, filename: str, folderid):
-    gauth = GoogleAuth()
-    gauth.LocalWebserverAuth()        
-    drive = GoogleDrive(gauth) 
-
-    if folderid != None:
-        f = drive.CreateFile({
-            "title":filename,
-            "parents":[
-                {
-                    "id":folderid
-                }
-            ]
-        })
-    else:
-        f=drive.CreateFile({
-            "title":filename
-        })
-    f.SetContentFile(path)
-    f.Upload()
-    f=None
-
-    print(f"Uploaded {filename} to drive Successfully")
-
-# todrive("E:/gitdrive/testpush.txt", "testpush", None)
-# put client_secrets.json in same dir as basicfuncs.py 
+togit("E:/telegit/basicfuncs.py", 'src', 'basicfuncs.py', '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', 'me-pikachu/telegit', 'updated todrive')
