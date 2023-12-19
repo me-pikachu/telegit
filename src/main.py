@@ -306,7 +306,7 @@ print("Welcome to telegit!")
 
 '''
 git = {
-    "gitoken" : "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",
+    "gitoken" : "<API Token>",
     "repo" : "me-pikachu/telegit",
     "desc" : "Changed help.txt"
 }
