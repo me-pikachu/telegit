@@ -32,7 +32,7 @@ def togit(path: str, folder, filename: str, gitoken: str, repo: str, desc: str):
             repo.create_file(f'{filename}', desc, data, branch='main')
     print(f'pushed {filename} successfully!!')
 
-togit("E:/telegit/gitfuncs.py", 'src', 'gitfuncs.py', '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', 'me-pikachu/telegit', 'added fromgit')
+# togit("E:/telegit/chatids.txt", 'src/Data', 'chatids.txt', '<YOUR TOKEN>', 'me-pikachu/telegit', 'chatids')
 
 def fromgit(repo: str, path_to_clone_to: str, gitoken: str):
     app = Github(gitoken)
