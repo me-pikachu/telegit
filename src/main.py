@@ -304,9 +304,11 @@ def pull(startdir: str):
 
 print("Welcome to telegit!")
 
+'''
 git = {
     "gitoken" : "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",
     "repo" : "me-pikachu/telegit",
-    "desc" : "Trying to push with the script"
+    "desc" : "Changed help.txt"
 }
 push(f"{currentdir}\\test",git)
+'''
