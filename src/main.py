@@ -167,7 +167,7 @@ def push_dir(startdir: str, git: dict, cache: dict, curdir: str, force_push: boo
     # since it is a DFS firstly go to the subdirectories of current directory
     subdir = file_handler.getsubdir(curdir)
     for dir in subdir:
-        push_dir(startdir, git, dir, force_push)
+        push_dir(startdir, git, cache, dir, force_push)
     
     subfiles = file_handler.getfiles(curdir)
     for files in subfiles:
@@ -196,3 +196,7 @@ def push(startdir: str, git: dict):
     ucache(startdir)
 
 print("Welcome to telegit!")
+'''
+git = {}
+push("test_dir",git)
+'''

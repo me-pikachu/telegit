@@ -21,18 +21,28 @@ def getsize(file_path: str):
 
 def getcache(startdir: str):
     # it reads from the cache file if any using pickle
-    cache_path = startdir + "\.telegit\cache.pkl"
-    fcache = open(cache_path, "r+")
-    cache = pickle.load(fcache)
-    fcache.close()
-    return cache
+    cache_path = startdir + "\\.telegit\\cache.pkl"
+    if (os.path.exists(cache_path)):
+        fcache = open(cache_path, "rb")
+        cache = pickle.load(fcache)
+        fcache.close()
+        return cache
+    else:
+        return {}
 
 def writecache(startdir: str, cache: dict):
     # it saves the data into cache file using pickle
-    cache_path = startdir + "\.telegit\cache.pkl"
-    fcache = open(cache_path, "w+")
-    pickle.dump(cache, fcache)
-    fcache.close()
+    cache_path = startdir + "\\.telegit\\cache.pkl"
+    if (os.path.exists(cache_path)):
+        fcache = open(cache_path, "wb") # wb because the file is in binary format not string
+        pickle.dump(cache, fcache)
+        fcache.close()
+    else:
+        # create the directory first
+        os.mkdir(startdir + "\\" + ".telegit")
+        fcache = open(cache_path, "wb") # wb because the file is in binary format not string
+        pickle.dump(cache, fcache)
+        fcache.close()
 
 def getfolder(file_path: str):
     # get the folder or the directory name from the file path
@@ -64,8 +74,10 @@ def getsubdir(curdir: str):
     dir = []
     files = os.scandir(curdir)
     for f in files:
-        if (f.is_dir):
-            dir.append(f.path) # f.path is the complete path
+        if (f.is_dir()): # initially it was f.is_dir and was True even for file also
+            # we also need to ignore .telegit and .git folders
+            if (f.name != ".telegit" and f.name != ".git"):
+                dir.append(f.path) # f.path is the complete path
     return dir
 
 def getfiles(curdir: str):
@@ -73,7 +85,7 @@ def getfiles(curdir: str):
     files = []
     freader = os.scandir(curdir)
     for f in freader:
-        if (f.is_file):
+        if (f.is_file()):
             files.append(f.path)
     return files
 
