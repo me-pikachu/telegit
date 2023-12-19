@@ -16,7 +16,7 @@ def start(update: Update, context: CallbackContext):
 
     
 def totele(path, bot=bot, TOKEN=TOKEN):
-    ids = open("E:/telegit/chatids.ids", 'r')
+    ids = open("Data/chatids.ids", 'r')
     l=ids.readlines()
     ids.close()
     chat_id = int(l[0])
@@ -25,6 +25,7 @@ def totele(path, bot=bot, TOKEN=TOKEN):
     response = requests.post(url, data={'chat_id': chat_id}, files={'document': document})
     content = response.content.decode("utf8")
     js = json.loads(content)
+    print("Upload to telegram is successfull")
     return js['result']['document']['file_id']
 
     
@@ -35,17 +36,17 @@ def fromtele(id: str, topath: str, filename: str, bot=bot):
         file.download(topath+filename)
     else:
         file.download(filename)
-    print("Downloaded!!")
+    print("Download from the telegram is successfull")
 
 
 def extractid(update: Update, context: CallbackContext):
     chat_id = update.message.chat_id
-    ids = open("E:/telegit/chatids.ids", 'w+')
+    ids = open("Data/chatids.ids", 'w+')
     ids.write(str(chat_id))
     ids.close()
     update.message.reply_text("extraction successfull!!")
 
-# file_id = totele("E:/telegit/chatids.ids")
+# file_id = totele("Data/chatids.ids")
 # fromtele(file_id, "E:/", "chatids.txt")
 
 #updater.dispatcher.add_handler(CommandHandler('start', start))
