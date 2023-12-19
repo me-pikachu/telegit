@@ -30,7 +30,7 @@ def togit(path: str, folder, filename: str, gitoken: str, repo: str, desc: str):
             repo.update_file(file_contents.path, desc, data, file_contents.sha, branch='main')
         else:
             repo.create_file(f'{filename}', desc, data, branch='main')
-    print(f'pushed {filename} successfully!!')
+    print(f'File {filename} pushed successfully')
 
 # togit("E:/telegit/gitfuncs.py", 'src', 'gitfuncs.py', '<YOUR TOKEN>', 'me-pikachu/telegit', 'git related funcs')
 
