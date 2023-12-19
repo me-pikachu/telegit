@@ -47,4 +47,35 @@ def getfilename_withoutext(file_path: str):
     fname = os.path.basename(file_path)
     return (fname.split("."))[0]
 
+def get_gitfolder(startdir: str, file_path: str):
+    dir = os.path.dirname(file_path)
+    dir.replace(startdir,"")
+    if (dir != ""): # if this condition is not checked then dir[0] may give errors
+        if (dir[0] == '\\' or dir[0] == '/'):
+            dir = dir[1:] # remove the first character of the string
+            if (dir == ""):
+                return None
+    else:
+        return None
+    return dir
+
+def getsubdir(curdir: str):
+    # using scandir
+    dir = []
+    files = os.scandir(curdir)
+    for f in files:
+        if (f.is_dir):
+            dir.append(f.path) # f.path is the complete path
+    return dir
+
+def getfiles(curdir: str):
+    # using scandir
+    files = []
+    freader = os.scandir(curdir)
+    for f in freader:
+        if (f.is_file):
+            files.append(f.path)
+    return files
+
+
 
