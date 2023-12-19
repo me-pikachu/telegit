@@ -1,2 +1,2 @@
-# gitdrive
+# Telegit
 This connects Github with Telegram Cloud Storage to possibly eliminate the use of LFS of github. During push requests, it checks for the files and if their size increases a particular limit(currently set to 50MB), it creates a Telegram link for that file and pushes file's link instead of the file and all such files have the extension .telegit. During pull requests it replaces .telegit with their original files.
