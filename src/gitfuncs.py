@@ -1,5 +1,5 @@
 from github import Github
-
+import os
 
 def togit(path: str, folder, filename: str, gitoken: str, repo: str, desc: str):
     app = Github(gitoken)
@@ -30,9 +30,28 @@ def togit(path: str, folder, filename: str, gitoken: str, repo: str, desc: str):
             repo.update_file(file_contents.path, desc, data, file_contents.sha, branch='main')
         else:
             repo.create_file(f'{filename}', desc, data, branch='main')
-    print(f'File {filename} pushed successfully')
+    print(f'pushed {filename} successfully!!')
 
-# togit("E:/telegit/gitfuncs.py", 'src', 'gitfuncs.py', '<YOUR TOKEN>', 'me-pikachu/telegit', 'git related funcs')
+# togit("E:/telegit/chatids.txt", 'src/Data', 'chatids.txt', '<YOUR TOKEN>', 'me-pikachu/telegit', 'chatids')
 
-def fromgit(**args):
-    pass
+def fromgit(repo: str, path_to_clone_to: str, gitoken: str):
+    app = Github(gitoken)
+    repo = app.get_repo(repo)
+    contents = repo.get_contents("")
+    #to_be_saved=[]
+    while contents:
+        file_content = contents.pop(0)
+        current_path = path_to_clone_to
+        if file_content.type == "dir":
+            current_path += file_content.path
+            
+            contents.extend(repo.get_contents(file_content.path))
+        else:
+            #print(file_content)
+            path_to_save_to = path_to_clone_to+file_content.path
+            #print(path_to_save_to)
+            with open(path_to_save_to, 'wb') as file:
+                file.write(file_content.decoded_content)
+
+# fromgit('me-pikachu/telegit', 'E:/test clone2/', '<YOUR TOKEN>')
+    
