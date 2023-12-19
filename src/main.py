@@ -258,6 +258,7 @@ def push_dir(startdir: str, git: dict, cache: dict, curdir: str, force_push: boo
                 push_file(startdir, files, git, file_cache, max_fsize)
         else:
             # force push the file as it is not in cache
+            print(f"No previous data available for the file {file_handler.get_gitloc(startdir, files)}")
             force_push_file(startdir, files, git, max_fsize)
 
     return curfilenum
