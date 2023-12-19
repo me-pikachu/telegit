@@ -49,8 +49,7 @@ def extractid(update: Update, context: CallbackContext):
 # fromtele(file_id, "E:/", "chatids.txt")
 
 #updater.dispatcher.add_handler(CommandHandler('start', start))
-#updater.dispatcher.
-# add_handler(CommandHandler('extractme', extractid))
+#updater.dispatcher.add_handler(CommandHandler('extractme', extractid))
 #updater.start_polling()
 #updater.idle()
 
