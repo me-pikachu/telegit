@@ -30,4 +30,4 @@ def togit(path: str, folder, filename: str, gitoken: str, repo: str, desc: str):
             repo.create_file(f'{filename}', desc, data, branch='main')
     print(f'pushed {filename} successfully!!')
 
-togit("E:/telegit/basicfuncs.py", 'src', 'basicfuncs.py', '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', 'me-pikachu/telegit', 'initial')
+# togit("E:/telegit/basicfuncs.py", 'src', 'basicfuncs.py', '<YOUR TOKEN>', 'me-pikachu/telegit', 'initial')
