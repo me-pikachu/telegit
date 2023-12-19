@@ -138,11 +138,11 @@ def force_push_file(startdir: str, file_path: str, git: dict, max_fsize: int):
 def push_dir(startdir: str, git: dict, cache: dict, curdir: str, force_push: bool):
     global max_fsize
     # since it is a DFS firstly go to the subdirectories of current directory
-    subdir = file_handler.getsubdir
+    subdir = file_handler.getsubdir(curdir)
     for dir in subdir:
         push_dir(startdir, git, dir, force_push)
     
-    subfiles = file_handler.getfiles
+    subfiles = file_handler.getfiles(curdir)
     for files in subfiles:
         if (len(cache)!=0 and f"{file_handler.get_gitfolder(startdir, files)}\\{file_handler.getfilename(files)}" in cache):
             file_cache = cache[f"{file_handler.get_gitfolder(startdir, files)}\\{file_handler.getfilename(files)}"]
