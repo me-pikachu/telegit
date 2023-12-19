@@ -135,6 +135,33 @@ def force_push_file(startdir: str, file_path: str, git: dict, max_fsize: int):
         # pushing the current file
         telegit_handler.to_git(path = file_path, folder = file_handler.get_gitfolder(startdir, file_path), filename = file_handler.getfilename(file_path), gitoken = git["gitoken"], repo = git["repo"], desc = git["desc"])
 
+def ucache_dir(startdir: str, curdir: str, cache: dict):
+    # get into the subdirectories first
+    # this functions returns the updates cache dictionary
+
+    subdir = file_handler.getsubdir(curdir)
+    for dir in subdir:
+        cache = ucache_dir(startdir, dir, cache)
+    
+    # now updates all the files in the current directory
+    subfiles = file_handler.getfiles(curdir)
+    for files in subfiles:
+        fdetails = {}
+        fdetails["fsize"] = file_handler.getsize(files)
+        fdetails["mtime"] = file_handler.getmtime(files)
+        fdetails["ctime"] = file_handler.getctime(files)
+        cache[f"{file_handler.get_gitfolder(startdir, files)}\\{file_handler.getfilename(files)}"] = fdetails
+    
+    return cache
+
+def ucache(startdir):
+    # this function updates the cache content and write into the .telegit folder
+    # same approach as that of push function (DFS)
+    cache = ucache_dir(startdir, startdir, {})
+
+    # save this cache into the file
+    file_handler.writecache(startdir, cache)
+
 def push_dir(startdir: str, git: dict, cache: dict, curdir: str, force_push: bool):
     global max_fsize
     # since it is a DFS firstly go to the subdirectories of current directory
@@ -166,6 +193,7 @@ def push(startdir: str, git: dict):
     else:
         print("Cache file located. Pushing all the modifications")
         push_dir(startdir, git, cache, startdir, False)
+    ucache(startdir)
 
 def __init__():
     print("Welcome to telegit!")

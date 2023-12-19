@@ -19,18 +19,18 @@ def getsize(file_path: str):
     fstat = os.stat(file_path)
     return fstat.st_size
 
-def getcache(folder: str):
+def getcache(startdir: str):
     # it reads from the cache file if any using pickle
-    cache_path = folder + "\.telegit\cache.pkl"
-    fcache = open(cache_path, "rb")
+    cache_path = startdir + "\.telegit\cache.pkl"
+    fcache = open(cache_path, "r+")
     cache = pickle.load(fcache)
     fcache.close()
     return cache
 
-def writecache(folder: str, cache: dict):
+def writecache(startdir: str, cache: dict):
     # it saves the data into cache file using pickle
-    cache_path = folder + "\.telegit\cache.pkl"
-    fcache = open(cache_path, "wb")
+    cache_path = startdir + "\.telegit\cache.pkl"
+    fcache = open(cache_path, "w+")
     pickle.dump(cache, fcache)
     fcache.close()
 
