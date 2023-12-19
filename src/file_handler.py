@@ -93,5 +93,19 @@ def getfiles(curdir: str):
             files.append(f.path)
     return files
 
+def totalfiles(startdir: str, curdir: str = None, count: int = 0):
+    if (curdir == None):
+        curdir = startdir
+    
+    subdir = getsubdir(curdir)
+    for dir in subdir:
+        count = totalfiles(startdir, dir, count)
+    
+    subfiles = getfiles(curdir)
+    count += len(subfiles)
+    return count
+
+
+
 
 
