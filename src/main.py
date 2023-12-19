@@ -309,4 +309,4 @@ git = {
     "repo" : "me-pikachu/telegit",
     "desc" : "Trying to push with the script"
 }
-push(f"{currentdir}\\test\\test_dir",git)
+push(f"{currentdir}\\test",git)

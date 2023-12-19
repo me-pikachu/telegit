@@ -2,6 +2,9 @@ from github import Github
 import os
 
 def togit(path: str, folder, filename: str, gitoken: str, repo: str, desc: str):
+    path = path.replace("\\", "/") # git does not treat blackslash as subdirectories
+    folder = folder.replace("\\", "/") # git does not treat blackslash as subdirectories
+    
     app = Github(gitoken)
 
     repo = app.get_repo(repo)
