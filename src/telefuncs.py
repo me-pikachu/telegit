@@ -5,6 +5,9 @@ from telegram.ext.commandhandler import CommandHandler
 import telegram
 import requests
 import json
+import os
+
+currentdir = os.path.dirname(os.path.abspath(__file__))
 
 TOKEN = "6713242583:AAFEEy1jEhOyax8440-yMAF7owu5ClAXLVI"
 
@@ -16,7 +19,7 @@ def start(update: Update, context: CallbackContext):
 
     
 def totele(path, bot=bot, TOKEN=TOKEN):
-    ids = open("Data/chatids.ids", 'r')
+    ids = open(f"{currentdir}/Data/chatids.ids", 'r')
     l=ids.readlines()
     ids.close()
     chat_id = int(l[0])
@@ -41,13 +44,13 @@ def fromtele(id: str, topath: str, filename: str, bot=bot):
 
 def extractid(update: Update, context: CallbackContext):
     chat_id = update.message.chat_id
-    ids = open("Data/chatids.ids", 'w+')
+    ids = open(f"{currentdir}/Data/chatids.ids", 'w+')
     ids.write(str(chat_id))
     ids.close()
     update.message.reply_text("extraction successfull!!")
 
-# file_id = totele("Data/chatids.ids")
-# fromtele(file_id, "E:/", "chatids.txt")
+# file_id = totele(f"{currentdir}/Data/chatids.ids")
+# fromtele(file_id, currentdir, "chatids.txt")
 
 #updater.dispatcher.add_handler(CommandHandler('start', start))
 #updater.dispatcher.add_handler(CommandHandler('extractme', extractid))
