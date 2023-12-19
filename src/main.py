@@ -195,6 +195,29 @@ def push(startdir: str, git: dict):
         push_dir(startdir, git, cache, startdir, False)
     ucache(startdir)
 
+def pull_dir(startdir: str, curdir: str):
+    # same approach as that of push function (DFS)
+    subdir = file_handler.getsubdir(curdir)
+    for dir in subdir:
+        pull_dir(startdir, dir)
+    
+    subfiles = file_handler.getfiels(curdir)
+    for files in subfiles:
+        if (file_handler.getfilext(files) == "telegit"):
+            # we need to read the file and download it's data
+            print("Downloading....")
+
+def pull(startdir: str):
+    # firstly making the normal github pull requests
+    # the files pulled may have ext .telegit
+    # we need to download that files and replace them with the original files
+
+    # making pull request from github
+
+
+    # now using the DFS approach visiting every file
+    pull_dir(startdir, startdir)
+
 print("Welcome to telegit!")
 '''
 git = {}
