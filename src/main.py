@@ -195,5 +195,4 @@ def push(startdir: str, git: dict):
         push_dir(startdir, git, cache, startdir, False)
     ucache(startdir)
 
-def __init__():
-    print("Welcome to telegit!")
+print("Welcome to telegit!")
