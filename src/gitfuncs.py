@@ -53,5 +53,5 @@ def fromgit(repo: str, path_to_clone_to: str, gitoken: str):
             with open(path_to_save_to, 'wb') as file:
                 file.write(file_content.decoded_content)
 
-# fromgit('me-pikachu/telegit', 'E:/test clone2/', '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')
+# fromgit('me-pikachu/telegit', 'E:/test clone2/', '<YOUR TOKEN>')
     
