@@ -19,7 +19,7 @@ def start(update: Update, context: CallbackContext):
 
     
 def totele(path, bot=bot, TOKEN=TOKEN):
-    ids = open(f"{currentdir}\\Data\\chatids.ids", 'r')
+    ids = open(f"{currentdir}\\Data\\chatids.txt", 'r')
     l=ids.readlines()
     ids.close()
     chat_id = int(l[0])
@@ -44,7 +44,7 @@ def fromtele(id: str, topath: str, filename: str, bot=bot):
 
 def extractid(update: Update, context: CallbackContext):
     chat_id = update.message.chat_id
-    ids = open(f"{currentdir}\\Data\\chatids.ids", 'w+')
+    ids = open(f"{currentdir}\\Data\\chatids.txt", 'w+')
     ids.write(str(chat_id))
     ids.close()
     update.message.reply_text("extraction successfull!!")
