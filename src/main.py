@@ -238,7 +238,39 @@ def ucache(startdir):
     file_handler.writecache(startdir, cache)
     print("Cache file successfully updated")
 
+'''
+def push_dir(startdir: str, git: dict, cache: dict, curdir: str, gitignore: dict, force_push: bool, curfilenum: int, totfilenum: int):
+    # igdir are the directories to be ignored and igfiles are the files to be ignored
+    global max_fsize
+    # since it is a DFS firstly go to the subdirectories of current directory
+    subdir = file_handler.getsubdir(curdir)
+    for dir in subdir:
+        if (dir not in gitignore["dir"]):
+            curfilenum = push_dir(startdir, git, cache, dir, force_push, curfilenum, totfilenum)
+    
+    subfiles = file_handler.getfiles(curdir)
+    for files in subfiles:
+        curfilenum += 1
+        print(f"File: ({curfilenum}/{totfilenum})")
+        if ((file_handler.getfilename(files) == gitignore["filename"]) or file_handler.comploc(files,gitignore)):
+            print(f"The file was found in .gitignore. Ignoring the file {file_handler.get_gitloc(startdir, files)}")
+        else:
+            if (len(cache)!=0 and file_handler.get_gitloc(startdir, files) in cache):
+                file_cache = cache[file_handler.get_gitloc(startdir, files)]
+                if (force_push):
+                    force_push_file(startdir, files, git, max_fsize)
+                else:
+                    push_file(startdir, files, git, file_cache, max_fsize)
+            else:
+                # force push the file as it is not in cache
+                print(f"No previous data available for the file {file_handler.get_gitloc(startdir, files)}")
+                force_push_file(startdir, files, git, max_fsize)
+            
+    return curfilenum
+'''
+
 def push_dir(startdir: str, git: dict, cache: dict, curdir: str, force_push: bool, curfilenum: int, totfilenum: int):
+    # igdir are the directories to be ignored and igfiles are the files to be ignored
     global max_fsize
     # since it is a DFS firstly go to the subdirectories of current directory
     subdir = file_handler.getsubdir(curdir)
@@ -249,7 +281,6 @@ def push_dir(startdir: str, git: dict, cache: dict, curdir: str, force_push: boo
     for files in subfiles:
         curfilenum += 1
         print(f"File: ({curfilenum}/{totfilenum})")
-
         if (len(cache)!=0 and file_handler.get_gitloc(startdir, files) in cache):
             file_cache = cache[file_handler.get_gitloc(startdir, files)]
             if (force_push):
@@ -260,7 +291,7 @@ def push_dir(startdir: str, git: dict, cache: dict, curdir: str, force_push: boo
             # force push the file as it is not in cache
             print(f"No previous data available for the file {file_handler.get_gitloc(startdir, files)}")
             force_push_file(startdir, files, git, max_fsize)
-
+            
     return curfilenum
 
 def push(startdir: str, git: dict):

@@ -108,6 +108,18 @@ def totalfiles(startdir: str, curdir: str = None, count: int = 0):
     count += len(subfiles)
     return count
 
+def comploc(path1: str, path2: str, startdir: dir = None):
+    path1 = path1.replace("/","\\")
+    path2 = path2.replace("/","\\")
+    if (startdir == None):
+        return (path1 == path2)
+    else:
+        # replace all / with \\
+        startdir = startdir.replace("/","\\")
+        # path2 can or cannot be complete path
+        return (path1 == path2 or path1 == (startdir+path2))
+        
+
 
 
 
