@@ -39,9 +39,9 @@ def push_file(startdir: str, file_path: str, git: dict, file_cache: dict, max_fs
                 filename = f"{file_handler.getfolder(file_path)}\\{file_handler.getfilename_withoutext(file_path)}.telegit"
                 ftelegit = open(filename, "w+")
                 # firstline is the filename and second line is the file_id
-                ftelegit.write(file_handler.getfilename)
+                ftelegit.write(file_handler.getfilename(file_path))
                 ftelegit.write("\n")
-                ftelegit.write(file_id)
+                ftelegit.write(str(file_id))
                 ftelegit.close()
 
                 # pushing the .telegit file
@@ -69,9 +69,9 @@ def push_file(startdir: str, file_path: str, git: dict, file_cache: dict, max_fs
                     filename = f"{file_handler.getfolder(file_path)}\\{file_handler.getfilename_withoutext(file_path)}.telegit"
                     ftelegit = open(filename, "w+")
                     # firstline is the filename and second line is the file_id
-                    ftelegit.write(file_handler.getfilename)
+                    ftelegit.write(file_handler.getfilename(file_path))
                     ftelegit.write("\n")
-                    ftelegit.write(file_id)
+                    ftelegit.write(str(file_id))
                     ftelegit.close()
 
                     # pushing the .telegit file
@@ -99,9 +99,9 @@ def push_file(startdir: str, file_path: str, git: dict, file_cache: dict, max_fs
                 filename = f"{file_handler.getfolder(file_path)}\\{file_handler.getfilename_withoutext(file_path)}.telegit"
                 ftelegit = open(filename, "w+")
                 # firstline is the filename and second line is the file_id
-                ftelegit.write(file_handler.getfilename)
+                ftelegit.write(file_handler.getfilename(file_path))
                 ftelegit.write("\n")
-                ftelegit.write(file_id)
+                ftelegit.write(str(file_id))
                 ftelegit.close()
 
                 # pushing the .telegit file
@@ -125,9 +125,9 @@ def push_file(startdir: str, file_path: str, git: dict, file_cache: dict, max_fs
                 filename = f"{file_handler.getfolder(file_path)}\\{file_handler.getfilename_withoutext(file_path)}.telegit"
                 ftelegit = open(filename, "w+")
                 # firstline is the filename and second line is the file_id
-                ftelegit.write(file_handler.getfilename)
+                ftelegit.write(file_handler.getfilename(file_path))
                 ftelegit.write("\n")
-                ftelegit.write(file_id)
+                ftelegit.write(str(file_id))
                 ftelegit.close()
 
                 # pushing the .telegit file
@@ -155,9 +155,9 @@ def push_file(startdir: str, file_path: str, git: dict, file_cache: dict, max_fs
                     filename = f"{file_handler.getfolder(file_path)}\\{file_handler.getfilename_withoutext(file_path)}.telegit"
                     ftelegit = open(filename, "w+")
                     # firstline is the filename and second line is the file_id
-                    ftelegit.write(file_handler.getfilename)
+                    ftelegit.write(file_handler.getfilename(file_path))
                     ftelegit.write("\n")
-                    ftelegit.write(file_id)
+                    ftelegit.write(str(file_id))
                     ftelegit.close()
 
                     # pushing the .telegit file
@@ -192,9 +192,9 @@ def force_push_file(startdir: str, file_path: str, git: dict, max_fsize: int):
         filename = f"{file_handler.getfolder(file_path)}\\{file_handler.getfilename_withoutext(file_path)}.telegit"
         ftelegit = open(filename, "w+")
         # firstline is the filename and second line is the file_id
-        ftelegit.write(file_handler.getfilename)
+        ftelegit.write(file_handler.getfilename(file_path))
         ftelegit.write("\n")
-        ftelegit.write(file_id)
+        ftelegit.write(str(file_id))
         ftelegit.close()
 
         # pushing the .telegit file
@@ -317,7 +317,7 @@ def pull_dir(startdir: str, curdir: str):
     for dir in subdir:
         pull_dir(startdir, dir)
     
-    subfiles = file_handler.getfiels(curdir)
+    subfiles = file_handler.getfiles(curdir)
     for files in subfiles:
         if (file_handler.getfilext(files) == "telegit"):
             # we need to read the file and download it's data
