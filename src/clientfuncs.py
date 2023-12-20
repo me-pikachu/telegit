@@ -12,13 +12,13 @@ client = TelegramClient(entity, APP_API_ID, APP_API_HASH)
 async def connect(client):
     await client.connect()
 
-async def sender(path: str, filename: str, botname = 'Telegit_bot', chatid = -1002023399035):
+async def sender(path: str, botname = 'Telegit_bot', chatid = -1002023399035):
     msg = await client.send_file(chatid, path, file_name=filename)
     return msg
 
 def totele(filepath, client=client):
     with client:
-        msg = client.loop.run_until_complete(sender(filepath, filename))
+        msg = client.loop.run_until_complete(sender(filepat))
         
     return msg.id
 
