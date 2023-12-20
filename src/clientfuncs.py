@@ -13,7 +13,7 @@ async def connect(client):
     await client.connect()
 
 async def sender(path: str, botname = 'Telegit_bot', chatid = -1002023399035):
-    msg = await client.send_file(chatid, path, file_name=filename)
+    msg = await client.send_file(chatid, path)
     return msg
 
 def totele(filepath, client=client):
