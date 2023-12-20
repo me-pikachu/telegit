@@ -16,7 +16,7 @@ async def sender(path: str, filename: str, botname = 'Telegit_bot', chatid = -10
     msg = await client.send_file(chatid, path, file_name=filename)
     return msg
 
-def totele(filepath, filename, client=client):
+def totele(filepath, client=client):
     with client:
         msg = client.loop.run_until_complete(sender(filepath, filename))
         

@@ -1,6 +1,6 @@
 import file_handler
 import gitfuncs
-import telefuncs
+import clientfuncs
 import os
 
 currentdir = os.path.dirname(os.path.abspath(__file__))
@@ -33,7 +33,7 @@ def push_file(startdir: str, file_path: str, git: dict, file_cache: dict, max_fs
             if (cursize > max_fsize):
                 print(f"The size of the file is greater than {max_fsize/(1024*1024)}MB\nPreparing file for Telegram upload")
                 # uploading the file for Telegram
-                file_id = telefuncs.totele(file_path)
+                file_id = clientfuncs.totele(file_path)
 
                 # creating .telegit file for the current file
                 filename = f"{file_handler.getfolder(file_path)}\\{file_handler.getfilename_withoutext(file_path)}.telegit"
@@ -63,7 +63,7 @@ def push_file(startdir: str, file_path: str, git: dict, file_cache: dict, max_fs
                 if (cursize > max_fsize):
                     print(f"The size of the file is greater than {max_fsize/(1024*1024)}MB\nPreparing file for Telegram upload")
                     # uploading the file for Telegram
-                    file_id = telefuncs.totele(file_path)
+                    file_id = clientfuncs.totele(file_path)
 
                     # creating .telegit file for the current file
                     filename = f"{file_handler.getfolder(file_path)}\\{file_handler.getfilename_withoutext(file_path)}.telegit"
@@ -93,7 +93,7 @@ def push_file(startdir: str, file_path: str, git: dict, file_cache: dict, max_fs
             if (cursize > max_fsize):
                 print(f"The size of the file is greater than {max_fsize/(1024*1024)}MB\nPreparing file for Telegram upload")
                 # uploading the file for Telegram
-                file_id = telefuncs.totele(file_path)
+                file_id = clientfuncs.totele(file_path)
 
                 # creating .telegit file for the current file
                 filename = f"{file_handler.getfolder(file_path)}\\{file_handler.getfilename_withoutext(file_path)}.telegit"
@@ -119,7 +119,7 @@ def push_file(startdir: str, file_path: str, git: dict, file_cache: dict, max_fs
             if (cursize > max_fsize):
                 print(f"The size of the file is greater than {max_fsize/(1024*1024)}MB\nPreparing file for Telegram upload")
                 # uploading the file for Telegram
-                file_id = telefuncs.totele(file_path)
+                file_id = clientfuncs.totele(file_path)
 
                 # creating .telegit file for the current file
                 filename = f"{file_handler.getfolder(file_path)}\\{file_handler.getfilename_withoutext(file_path)}.telegit"
@@ -149,7 +149,7 @@ def push_file(startdir: str, file_path: str, git: dict, file_cache: dict, max_fs
                 if (cursize > max_fsize):
                     print(f"The size of the file is greater than {max_fsize/(1024*1024)}MB\nPreparing file for Telegram upload")
                     # uploading the file for Telegram
-                    file_id = telefuncs.totele(file_path)
+                    file_id = clientfuncs.totele(file_path)
 
                     # creating .telegit file for the current file
                     filename = f"{file_handler.getfolder(file_path)}\\{file_handler.getfilename_withoutext(file_path)}.telegit"
@@ -186,7 +186,7 @@ def force_push_file(startdir: str, file_path: str, git: dict, max_fsize: int):
     if (cursize > max_fsize):
         print(f"The size of the file is greater than {max_fsize/(1024*1024)}MB\nPreparing file for Telegram upload")
         # uploading the file for Telegram
-        file_id = telefuncs.totele(file_path)
+        file_id = clientfuncs.totele(file_path)
 
         # creating .telegit file for the current file
         filename = f"{file_handler.getfolder(file_path)}\\{file_handler.getfilename_withoutext(file_path)}.telegit"
