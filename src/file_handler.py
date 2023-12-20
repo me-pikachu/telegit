@@ -96,8 +96,8 @@ def getfiles(curdir: str):
             files.append(f.path)
     return files
 
-def totalfiles(startdir: str, curdir: str = None, count: int = 0):
-    if (curdir == None):
+def totalfiles(startdir: str, curdir: str = "", count: int = 0):
+    if (curdir == ""):
         curdir = startdir
     
     subdir = getsubdir(curdir)
@@ -108,10 +108,10 @@ def totalfiles(startdir: str, curdir: str = None, count: int = 0):
     count += len(subfiles)
     return count
 
-def comploc(path1: str, path2: str, startdir: dir = None):
+def comploc(path1: str, path2: str, startdir: str = ""):
     path1 = path1.replace("/","\\")
     path2 = path2.replace("/","\\")
-    if (startdir == None):
+    if (startdir == ""):
         return (path1 == path2)
     else:
         # replace all / with \\

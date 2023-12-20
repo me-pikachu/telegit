@@ -45,8 +45,9 @@ def push_file(startdir: str, file_path: str, git: dict, file_cache: dict, max_fs
                 ftelegit.close()
 
                 # pushing the .telegit file
-                print("Preparing the file for git push")
-                gitfuncs.togit(path = file_path, folder = file_handler.get_gitfolder(startdir, file_path), filename = f"{file_handler.getfilename_withoutext(file_path)}.telegit", gitoken = git["gitoken"], repo = git["repo"], desc = git["desc"])
+                print("Preparing the .telegit file for git push")
+                ftelegit = f"{file_handler.getfolder(file_path)}\\{file_handler.getfilename_withoutext(file_path)}.telegit"
+                gitfuncs.togit(path = ftelegit, folder = file_handler.get_gitfolder(startdir, file_path), filename = f"{file_handler.getfilename_withoutext(file_path)}.telegit", gitoken = git["gitoken"], repo = git["repo"], desc = git["desc"])
 
             else:
                 print(f"The size of the file is less than {max_fsize/(1024*1024)}MB\nPreparing file for git push")
@@ -75,8 +76,9 @@ def push_file(startdir: str, file_path: str, git: dict, file_cache: dict, max_fs
                     ftelegit.close()
 
                     # pushing the .telegit file
-                    print("Preparing the file for git push")
-                    gitfuncs.togit(path = file_path, folder = file_handler.get_gitfolder(startdir, file_path), filename = f"{file_handler.getfilename_withoutext(file_path)}.telegit", gitoken = git["gitoken"], repo = git["repo"], desc = git["desc"])
+                    print("Preparing the .telegit file for git push")
+                    ftelegit = f"{file_handler.getfolder(file_path)}\\{file_handler.getfilename_withoutext(file_path)}.telegit"
+                    gitfuncs.togit(path = ftelegit, folder = file_handler.get_gitfolder(startdir, file_path), filename = f"{file_handler.getfilename_withoutext(file_path)}.telegit", gitoken = git["gitoken"], repo = git["repo"], desc = git["desc"])
 
                 else:
                     print(f"The size of the file is less than {max_fsize/(1024*1024)}MB\nPreparing file for git push")
@@ -105,8 +107,9 @@ def push_file(startdir: str, file_path: str, git: dict, file_cache: dict, max_fs
                 ftelegit.close()
 
                 # pushing the .telegit file
-                print("Preparing the file for git push")
-                gitfuncs.togit(path = file_path, folder = file_handler.get_gitfolder(startdir, file_path), filename = f"{file_handler.getfilename_withoutext(file_path)}.telegit", gitoken = git["gitoken"], repo = git["repo"], desc = git["desc"])
+                print("Preparing the .telegit file for git push")
+                ftelegit = f"{file_handler.getfolder(file_path)}\\{file_handler.getfilename_withoutext(file_path)}.telegit"
+                gitfuncs.togit(path = ftelegit, folder = file_handler.get_gitfolder(startdir, file_path), filename = f"{file_handler.getfilename_withoutext(file_path)}.telegit", gitoken = git["gitoken"], repo = git["repo"], desc = git["desc"])
 
             else:
                 print(f"The size of the file is less than {max_fsize/(1024*1024)}MB\nPreparing file for git push")
@@ -131,8 +134,9 @@ def push_file(startdir: str, file_path: str, git: dict, file_cache: dict, max_fs
                 ftelegit.close()
 
                 # pushing the .telegit file
-                print("Preparing the file for git push")
-                gitfuncs.togit(path = file_path, folder = file_handler.get_gitfolder(startdir, file_path), filename = f"{file_handler.getfilename_withoutext(file_path)}.telegit", gitoken = git["gitoken"], repo = git["repo"], desc = git["desc"])
+                print("Preparing the .telegit file for git push")
+                ftelegit = f"{file_handler.getfolder(file_path)}\\{file_handler.getfilename_withoutext(file_path)}.telegit"
+                gitfuncs.togit(path = ftelegit, folder = file_handler.get_gitfolder(startdir, file_path), filename = f"{file_handler.getfilename_withoutext(file_path)}.telegit", gitoken = git["gitoken"], repo = git["repo"], desc = git["desc"])
 
             else:
                 print(f"The size of the file is less than {max_fsize/(1024*1024)}MB\nPreparing file for git push")
@@ -161,8 +165,9 @@ def push_file(startdir: str, file_path: str, git: dict, file_cache: dict, max_fs
                     ftelegit.close()
 
                     # pushing the .telegit file
-                    print("Preparing the file for git push")
-                    gitfuncs.togit(path = file_path, folder = file_handler.get_gitfolder(startdir, file_path), filename = f"{file_handler.getfilename_withoutext(file_path)}.telegit", gitoken = git["gitoken"], repo = git["repo"], desc = git["desc"])
+                    print("Preparing the .telegit file for git push")
+                    ftelegit = f"{file_handler.getfolder(file_path)}\\{file_handler.getfilename_withoutext(file_path)}.telegit"
+                    gitfuncs.togit(path = ftelegit, folder = file_handler.get_gitfolder(startdir, file_path), filename = f"{file_handler.getfilename_withoutext(file_path)}.telegit", gitoken = git["gitoken"], repo = git["repo"], desc = git["desc"])
 
                 else:
                     print(f"The size of the file is less than {max_fsize/(1024*1024)}MB\nPreparing file for git push")
@@ -198,8 +203,10 @@ def force_push_file(startdir: str, file_path: str, git: dict, max_fsize: int):
         ftelegit.close()
 
         # pushing the .telegit file
-        print("Preparing the file for git push")
-        gitfuncs.togit(path = file_path, folder = file_handler.get_gitfolder(startdir, file_path), filename = f"{file_handler.getfilename_withoutext(file_path)}.telegit", gitoken = git["gitoken"], repo = git["repo"], desc = git["desc"])
+        print("Preparing the .telegit file for git push")
+        ftelegit = f"{file_handler.getfolder(file_path)}\\{file_handler.getfilename_withoutext(file_path)}.telegit"
+        gitfuncs.togit(path = ftelegit, folder = file_handler.get_gitfolder(startdir, file_path), filename = f"{file_handler.getfilename_withoutext(file_path)}.telegit", gitoken = git["gitoken"], repo = git["repo"], desc = git["desc"])
+
 
     else:
         print(f"The size of the file is less than {max_fsize/(1024*1024)}MB\nPreparing file for git push")
@@ -336,11 +343,10 @@ def pull(startdir: str):
 
 print("Welcome to telegit!")
 
-'''
+
 git = {
-    "gitoken" : "<API Token>",
+    "gitoken" : "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",
     "repo" : "me-pikachu/telegit",
-    "desc" : "Changed help.txt"
+    "desc" : "Testing push functions of the script"
 }
 push(f"{currentdir}\\test",git)
-'''
