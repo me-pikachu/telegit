@@ -18,7 +18,7 @@ async def sender(path: str, botname = 'Telegit_bot', chatid = -1002023399035):
 
 def totele(filepath, client=client):
     with client:
-        msg = client.loop.run_until_complete(sender(filepat))
+        msg = client.loop.run_until_complete(sender(filepath))
         
     return msg.id
 
