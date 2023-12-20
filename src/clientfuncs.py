@@ -1,4 +1,3 @@
-
 from telethon import TelegramClient
 from telethon.tl.types import DocumentAttributeAudio
 import mimetypes
@@ -16,14 +15,17 @@ client = TelegramClient(entity, APP_API_ID, APP_API_HASH)
 #connect()
 
 #client.start(); 
+
 async def totele(path: str, filename: str, botname = 'Telegit_bot', chatid = -1002023399035):
     msg = await client.send_file(chatid, path)
     return msg.media.document.id
-with client:
-    id = client.loop.run_until_complete(totele("E:/telegit/zero.new", "blabla"))
+
+#with client:
+#    id = client.loop.run_until_complete(totele("E:/telegit/zero.new", "blabla"))
 
 async def fromtele(id, chatid = -1002023399035):
     await client.download_media(id)
+
 #with client:
 #    client.loop.run_until_complete(fromtele(id))
 #print(id)
