@@ -3,7 +3,7 @@ from telethon import TelegramClient
 from telethon.tl.types import DocumentAttributeAudio
 import mimetypes
 import sys
-
+import time
 entity = 'telegit'
 APP_API_ID = 28521183
 APP_API_HASH = "e139c4dca684be89f42e609b929f5fad"
@@ -26,13 +26,25 @@ async def fromtele(msg_id, file_path, filename:str, client=client, chatid = -100
     async for message in client.iter_messages(chatid):
         if (message.id==msg_id):
             total_size = message.media.document.size
+            #print(total_size)
             dl=0
+            chunk_size = int(total_size/100)
+            if chunk_size>32000:
+                chunk_size = int(chunk_size/10)
+            if chunk_size<1:
+                chunk_size=1
             with open(f'{file_path}\\{filename}', 'wb') as handle:
-                async for chunk in client.iter_download(message.media, chunk_size=int(total_size/10)):
+                t1 = time.time()
+                async for chunk in client.iter_download(message.media, chunk_size=chunk_size):
                     dl += len(chunk)
                     handle.write(chunk)
+                    t2=time.time()
+                    download_speed = (dl/(t2-t1))/1000
+                    eta = int((total_size-dl)/download_speed)
+                    download_speed = round(download_speed, 2)
                     done = int(50 * dl / total_size)
-                    sys.stdout.write("\r[%s%s]" % ('=' * done, ' ' * (50-done)) )
+                    sys.stdout.write(f"\r|%s%s|" % ('â–ˆ' * done, ' ' * (50-done)) )
+                    sys.stdout.write(f" {round((dl/total_size * 100), 2)} %  in {int(t2-t1)}s  [{download_speed} Kbps, eta : {eta}s]")
                     sys.stdout.flush()
             break
             #await message.download_media(file=f'E:\\telegit\\{filename}')
@@ -41,8 +53,8 @@ async def fromtele(msg_id, file_path, filename:str, client=client, chatid = -100
             print(message.id)
     print(f"downloaded {file_path}\{filename} !!")
 
-#msg_id = totele("E:/telegit/lauda2.txt", "changedname.txt")
+#msg_id = totele("E:/telegit/zero.new", "changedname.txt")
 #print(msg_id)
 #with client:
-#    stat = client.loop.run_until_complete(fromtele(msg_id, "E:\\telegit", "lauda69.txt"))
+ #   stat = client.loop.run_until_complete(fromtele(95, "E:\\telegit", "newzero.new"))
 #    print('saved')
