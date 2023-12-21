@@ -1,6 +1,7 @@
 import file_handler
 import gitfuncs
 import clientfuncs
+from clientfuncs import client
 import os
 
 currentdir = os.path.dirname(os.path.abspath(__file__))
@@ -347,7 +348,8 @@ def pull_dir(startdir: str, curdir: str, totfilenum: int, curfilenum: int):
             # lines[0] is the file name
             # lines[1] is the msg.id
             file_path = file_handler.change_basename(files, lines[0])
-            clientfuncs.fromtele(int(lines[1]), file_path)
+            with client:
+                client.loop.run_until_complete(clientfuncs.fromtele(int(lines[1]), file_path))
             print("File successfully downloaded")
         else:
             print("The file is not a '.telegit' file")
