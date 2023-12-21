@@ -1,9 +1,10 @@
 from github import Github
 import os
 
-def togit(path: str, folder, filename: str, gitoken: str, repo: str, desc: str):
+def togit(path: str, folder: str, filename: str, gitoken: str, repo: str, desc: str):
     path = path.replace("\\", "/") # git does not treat blackslash as subdirectories
-    folder = folder.replace("\\", "/") # git does not treat blackslash as subdirectories
+    if (folder is not None):
+        folder = folder.replace("\\", "/") # git does not treat blackslash as subdirectories
     
     app = Github(gitoken)
 
@@ -33,11 +34,14 @@ def togit(path: str, folder, filename: str, gitoken: str, repo: str, desc: str):
             repo.update_file(file_contents.path, desc, data, file_contents.sha, branch='main')
         else:
             repo.create_file(f'{filename}', desc, data, branch='main')
-    print(f'pushed {filename} successfully!!')
+    print(f'File {filename} pushed successfully!!')
 
 # togit("E:/telegit/chatids.txt", 'src/Data', 'chatids.txt', '<YOUR TOKEN>', 'me-pikachu/telegit', 'chatids')
 
 def fromgit(repo: str, path_to_clone_to: str, gitoken: str):
+    path_to_clone_to = path_to_clone_to.replace("\\","/") # changing windows file separtor to github file separtor
+    path_to_clone_to = f"{path_to_clone_to}/" # adding a / at the end
+
     app = Github(gitoken)
     repo = app.get_repo(repo)
     contents = repo.get_contents("")

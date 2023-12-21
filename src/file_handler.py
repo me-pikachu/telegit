@@ -29,6 +29,35 @@ def getcache(startdir: str):
         return cache
     else:
         return {}
+    
+    
+def read(file_path: str):
+    # reads the text out a file and if FILE DOES NOT EXISTS returns a empty string
+    if (os.path.exists(file_path)):
+        file = open(file_path, "r")
+        data = file.read()
+        file.close()
+        return data
+    else:
+        return ""
+    
+def read_gitcred(startdir: str):
+    # reads gitcred.file and returns a dictionary
+    if (os.path.exists(f"{startdir}\\.telegit\\gitcred.file")):
+        file = open(f"{startdir}\\.telegit\\gitcred.file", "r")
+        data = (file.read()).split("\n")
+        file.close()
+        git = {}
+        git["repo"] = data[0]
+        git["gitoken"] = data[1]
+        git["desc"] = ""
+    else:
+        git = {}
+        git["repo"] = ""
+        git["gitoken"] = ""
+        git["desc"] = ""
+    return git
+
 
 def writecache(startdir: str, cache: dict):
     # it saves the data into cache file using pickle
@@ -39,7 +68,8 @@ def writecache(startdir: str, cache: dict):
         fcache.close()
     else:
         # create the directory first
-        os.mkdir(startdir + "\\" + ".telegit")
+        if (not os.path.isdir(startdir + "\\" + ".telegit")):
+            os.mkdir(startdir + "\\" + ".telegit")
         fcache = open(cache_path, "wb") # wb because the file is in binary format not string
         pickle.dump(cache, fcache)
         fcache.close()
@@ -52,29 +82,53 @@ def getfilename(file_path: str):
     # gets the file name with ext from the file path
     return os.path.basename(file_path)
 
-def getfilename_withoutext(file_path: str):
+def getfilename_rmext(file_path: str):
     # gets the file name without ext from the file path
     fname = os.path.basename(file_path)
     return (fname.split("."))[0]
 
 def getfilext(file_path: str):
-    filename = getfilename(file_path)
-    return filename.split(".")[1]
+    # returns the file extension
+    filename = getfilename(file_path).split(".")
+    if (len(filename) == 1):
+        return "" # there is no extension
+    return filename[1]
 
 def get_gitfolder(startdir: str, file_path: str):
+    # return the corresponding the git folder location from the file_path
     dir = os.path.dirname(file_path)
     dir = dir.replace(startdir,"")
     if (dir != ""): # if this condition is not checked then dir[0] may give errors
         if (dir[0] == '\\' or dir[0] == '/'):
             dir = dir[1:] # remove the first character of the string
             if (dir == ""):
-                return None
+                return ""
     else:
-        return None
+        return ""
     return dir
 
 def get_gitloc(startdir: str, file_path: str):
+    # gets the git location of a file
+    # i.e. removes the start directory from the complete path
     return f"{get_gitfolder(startdir, file_path)}\\{getfilename(file_path)}"
+
+def to_telegit(file_path: str):
+    # changes extension of a file to telegit
+    return f"{getfolder(file_path)}\\{getfilename_rmext(file_path)}.telegit"
+
+def change_ext(file_path: str, new_ext: str):
+    # changes the extension of a file to new_ext
+    return f"{getfolder(file_path)}\\{getfilename_rmext(file_path)}.{new_ext}"
+
+def change_basename(file_path: str, basename: str):
+    # changes the basename in the file_path
+    return f"{getfolder(file_path)}\\{basename}"
+
+def formatdir(dir: str):
+    dir = dir.replace("/","\\")
+    if (dir[len(dir)-1] == '\\'):
+        dir = dir[:-1]
+    return dir
 
 def getsubdir(curdir: str):
     # using scandir
@@ -97,6 +151,7 @@ def getfiles(curdir: str):
     return files
 
 def totalfiles(startdir: str, curdir: str = "", count: int = 0):
+    # counts the total number of files in a particular directory
     if (curdir == ""):
         curdir = startdir
     
@@ -109,6 +164,7 @@ def totalfiles(startdir: str, curdir: str = "", count: int = 0):
     return count
 
 def comploc(path1: str, path2: str, startdir: str = ""):
+    # compare two location (path2 can be a git location)
     path1 = path1.replace("/","\\")
     path2 = path2.replace("/","\\")
     if (startdir == ""):
@@ -118,6 +174,7 @@ def comploc(path1: str, path2: str, startdir: str = ""):
         startdir = startdir.replace("/","\\")
         # path2 can or cannot be complete path
         return (path1 == path2 or path1 == (startdir+path2))
+
         
 
 
