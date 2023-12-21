@@ -373,16 +373,6 @@ def pull(startdir: str, git: dict):
         upgitcred(startdir, git)
         print("All the files are successfully pulled from github")
 
-    
-
-'''
-git = {
-    "gitoken" : "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",
-    "repo" : "me-pikachu/telegit",
-    "desc" : "Testing push functions of the script"
-}
-push(f"{currentdir}\\test",git)
-'''
 
 print("Welcome to telegit!")
 while (True):
