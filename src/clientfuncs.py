@@ -22,10 +22,10 @@ def totele(filepath, caption, client=client):
         
     return msg.id
 
-async def fromtele(msg_id, filename:str, client=client, chatid = -1002023399035):
+async def fromtele(msg_id, folder_path, filename:str, client=client, chatid = -1002023399035):
     async for message in client.iter_messages(chatid):
         if (message.id==msg_id):
-            await message.download_media(file=f'E:\\telegit\\{filename}')
+            await message.download_media(file=f'{folder_path}\\{filename}')
             break
         else:
             print(message.id)
