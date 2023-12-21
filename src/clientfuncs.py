@@ -12,13 +12,13 @@ client = TelegramClient(entity, APP_API_ID, APP_API_HASH)
 async def connect(client):
     await client.connect()
 
-async def sender(path: str, botname = 'Telegit_bot', chatid = -1002023399035):
-    msg = await client.send_file(chatid, path)
+async def sender(path: str, caption, botname = 'Telegit_bot', chatid = -1002023399035):
+    msg = await client.send_file(chatid, path, caption=str(caption))
     return msg
 
-def totele(filepath, client=client):
+def totele(filepath, caption, client=client):
     with client:
-        msg = client.loop.run_until_complete(sender(filepath))
+        msg = client.loop.run_until_complete(sender(filepath, caption))
         
     return msg.id
 
@@ -30,7 +30,7 @@ async def fromtele(msg_id, filename:str, client=client, chatid = -1002023399035)
         else:
             print(message.id)
 
-#msg_id = totele("E:/telegit/lauda.txt", "lauda.txt")
+#msg_id = totele("E:/telegit/lauda2.txt", "changedname.txt")
 #print(msg_id)
 #with client:
 #    stat = client.loop.run_until_complete(fromtele(msg_id, "lauda3.txt"))
