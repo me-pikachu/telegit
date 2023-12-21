@@ -25,7 +25,7 @@ def push_file(startdir: str, file_path: str, git: dict, file_cache: dict, max_fs
         # as file size is the same file need not to be pushed but further checking modification time
         if (mtime == file_cache["mtime"]):
             # modification time is also the same no need for any push
-            print(f"Cannot find any relevant push data for the file '.\\{git_path}'")
+            print(f"Cannot find any relevant push data for the file '.{git_path}'")
             return
         elif (mtime > file_cache["mtime"]):
             # size same but still there is modification in the file
@@ -178,13 +178,13 @@ def push_file(startdir: str, file_path: str, git: dict, file_cache: dict, max_fs
                 print("Cancelling the push of the current file")
             return
 
-    print(f"Successfull pushing of the file '.\\{git_path}'")
+    print(f"Successfull pushing of the file '.{git_path}'")
 
 
 def force_push_file(startdir: str, file_path: str, git: dict, max_fsize: int):
     git_path = file_handler.get_gitloc(startdir, file_path)
 
-    print(f"Forcefully pushing the file '.\\{git_path}'")
+    print(f"Forcefully pushing the file '.{git_path}'")
 
     cursize = file_handler.getsize(file_path)
 
@@ -213,7 +213,7 @@ def force_push_file(startdir: str, file_path: str, git: dict, max_fsize: int):
         # pushing the current file
         gitfuncs.togit(path = file_path, folder = file_handler.get_gitfolder(startdir, file_path), filename = file_handler.getfilename(file_path), gitoken = git["gitoken"], repo = git["repo"], desc = git["desc"])
 
-    print(f"Successfull pushing of the file '.\\{git_path}'")
+    print(f"Successfull pushing of the file '.{git_path}'")
 
 def upcache_dir(startdir: str, curdir: str, cache: dict):
     # get into the subdirectories first
