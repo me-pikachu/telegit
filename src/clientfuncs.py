@@ -43,7 +43,7 @@ async def fromtele(msg_id, file_path, filename:str, client=client, chatid = -100
                     eta = int((total_size-dl)/download_speed)
                     download_speed = round(download_speed, 2)
                     done = int(50 * dl / total_size)
-                    sys.stdout.write(f"\r|%s%s|" % ('â–ˆ' * done, ' ' * (50-done)) )
+                    sys.stdout.write(f"\r|%s%s|" % ('█' * done, ' ' * (50-done)) )
                     sys.stdout.write(f" {round((dl/total_size * 100), 2)} %  in {int(t2-t1)}s  [{download_speed} Kbps, eta : {eta}s]")
                     sys.stdout.flush()
             break
