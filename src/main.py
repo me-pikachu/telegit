@@ -331,7 +331,7 @@ def pull_dir(startdir: str, curdir: str, totfilenum: int, curfilenum: int):
     # same approach as that of push function (DFS)
     subdir = file_handler.getsubdir(curdir)
     for dir in subdir:
-        curfilenum = pull_dir(startdir, dir)
+        curfilenum = pull_dir(startdir, dir, totfilenum, curfilenum)
     
     subfiles = file_handler.getfiles(curdir)
     for files in subfiles:

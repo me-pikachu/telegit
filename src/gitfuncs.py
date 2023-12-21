@@ -1,5 +1,6 @@
 from github import Github
 import os
+import file_handler
 
 def togit(path: str, folder: str, filename: str, gitoken: str, repo: str, desc: str):
     path = path.replace("\\", "/") # git does not treat blackslash as subdirectories
@@ -57,8 +58,14 @@ def fromgit(repo: str, path_to_clone_to: str, gitoken: str):
             #print(file_content)
             path_to_save_to = path_to_clone_to+file_content.path
             #print(path_to_save_to)
-            with open(path_to_save_to, 'wb') as file:
-                file.write(file_content.decoded_content)
+            if (os.path.exists(file_handler.getfolder(path_to_save_to))):
+                with open(path_to_save_to, 'wb') as file:
+                    file.write(file_content.decoded_content)
+            else:
+                # create the directory first
+                os.mkdir(file_handler.getfolder(path_to_save_to))
+                with open(path_to_save_to, 'wb') as file:
+                    file.write(file_content.decoded_content)
 
 # fromgit('me-pikachu/telegit', 'E:/test clone2/', '<YOUR TOKEN>')
     
