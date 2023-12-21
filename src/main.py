@@ -58,7 +58,7 @@ def push_file(startdir: str, file_path: str, git: dict, file_cache: dict, max_fs
         else:
             # the file has been modified before what have been stored in the cache
             cache_mtime = file_cache["mtime"]
-            print(f"Error: The Modification time of the file {file_path} is {mtime} but that stored in the cache is {cache_mtime}")
+            print(f"Error: The Modification time of the file '.{git_path}' is {mtime} but that stored in the cache is {cache_mtime}")
             print("Would you like to force push anyway (y/n)?")
             i = str(input())
             if (i.lower() == "y"):
@@ -147,7 +147,7 @@ def push_file(startdir: str, file_path: str, git: dict, file_cache: dict, max_fs
         else:
             # the file has been modified before what have been stored in the cache
             cache_mtime = file_cache["mtime"]
-            print(f"Error: The Modification time of the file {file_path} is {mtime} but that stored in the cache is {cache_mtime}")
+            print(f"Error: The Modification time of the file '.{git_path}' is {mtime} but that stored in the cache is {cache_mtime}")
             print("Would you like to force push anyway (y/n)?")
             i = str(input())
             if (i == "y"):
@@ -306,7 +306,7 @@ def push_dir(startdir: str, git: dict, cache: dict, curdir: str, force_push: boo
                 push_file(startdir, files, git, file_cache, max_fsize)
         else:
             # force push the file as it is not in cache
-            print(f"No previous data available for the file {file_handler.get_gitloc(startdir, files)}")
+            print(f"No previous data available for the file '.{file_handler.get_gitloc(startdir, files)}'")
             force_push_file(startdir, files, git, max_fsize)
             
     return curfilenum

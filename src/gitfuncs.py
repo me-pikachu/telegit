@@ -3,6 +3,9 @@ import os
 import file_handler
 
 def togit(path: str, folder: str, filename: str, gitoken: str, repo: str, desc: str):
+    if (folder.strip() == ""):
+        folder = None
+
     path = path.replace("\\", "/") # git does not treat blackslash as subdirectories
     if (folder is not None):
         folder = folder.replace("\\", "/") # git does not treat blackslash as subdirectories
@@ -23,7 +26,7 @@ def togit(path: str, folder: str, filename: str, gitoken: str, repo: str, desc: 
         else:
             total_files.append(file_content.path)
 
-    if folder != None:
+    if (folder != None):
         if f'{folder}/{filename}' in total_files:
             file_contents = repo.get_contents(f'{folder}/{filename}', ref="main")
             repo.update_file(file_contents.path, desc, data, file_contents.sha, branch='main')
@@ -35,7 +38,7 @@ def togit(path: str, folder: str, filename: str, gitoken: str, repo: str, desc: 
             repo.update_file(file_contents.path, desc, data, file_contents.sha, branch='main')
         else:
             repo.create_file(f'{filename}', desc, data, branch='main')
-    print(f'File {filename} pushed successfully!!')
+    print(f"File '{filename}' pushed successfully!!")
 
 # togit("E:/telegit/chatids.txt", 'src/Data', 'chatids.txt', '<YOUR TOKEN>', 'me-pikachu/telegit', 'chatids')
 
