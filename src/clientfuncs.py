@@ -23,8 +23,47 @@ client = TelegramClient(entity, APP_API_ID, APP_API_HASH)
 async def connect(client):
     await client.connect()
 
+def ProgressCallback(sent_bytes, total, t1=time.time()):
+    done = int(50 * sent_bytes / total)
+    t2 = time.time()
+    upload_speed = (sent_bytes/(t2-t1))/1048576
+    #upload_speed = round(upload_speed, 2)
+    eta = int(((total-sent_bytes)/1048576)/upload_speed)
+    sys.stdout.write(f"\r|%s%s|" % ('█' * done, ' ' * (50-done)))
+
+    if (upload_speed < 1.0):
+        # less than 1MBps
+        upload_speed = round(upload_speed*1024 , 2)
+        if (eta < 60):
+            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}KBps, eta : {eta}s]")
+        elif (eta<3600):
+            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}KBps, eta : {time.strftime('%M:%S', time.gmtime(eta))}]")
+        else:
+            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}KBps, eta : {time.strftime('%H:%M:%S', time.gmtime(eta))}]")
+    elif (upload_speed >= 1.0 and upload_speed<1024):
+        upload_speed = round(upload_speed, 2)
+        if (eta < 60):
+            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}MBps, eta : {eta}s]")
+        elif (eta<3600):
+            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}MBps, eta : {time.strftime('%M:%S', time.gmtime(eta))}]")
+        else:
+            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}MBps, eta : {time.strftime('%H:%M:%S', time.gmtime(eta))}]")
+
+    elif (upload_speed >= 1024):
+        upload_speed = round(upload_speed/1024 , 2)
+        if (eta < 60):
+            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}GBps, eta : {eta}s]")
+        elif (eta < 3600):
+            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}GBps, eta : {time.strftime('%M:%S', time.gmtime(eta))}]")
+        else:
+            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}GBps, eta : {time.strftime('%H:%M:%S', time.gmtime(eta))}]")
+    
+    sys.stdout.flush()
+
+
 async def sender(path: str, caption: str = "", botname = botname, chatid = chatid):
-    msg = await client.send_file(chatid, path, caption=str(caption))
+    file = await client.upload_file(path, progress_callback=ProgressCallback)
+    msg = await client.send_file(chatid, file, caption=str(caption))
     return msg
 
 def totele(filepath, caption: str = "", client=client):
@@ -86,11 +125,11 @@ async def fromtele(msg_id: int, file_path:str, client=client, chatid = chatid):
                         # speed greater than equal to 1gbps
                         download_speed = round(download_speed/(1024*1024), 2)
                         if (eta < 60):
-                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} MBps, eta : {eta}s]")
+                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} GBps, eta : {eta}s]")
                         elif (eta < 3600):
-                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} MBps, eta : {time.strftime('%M:%S', time.gmtime(eta))}]")
+                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} GBps, eta : {time.strftime('%M:%S', time.gmtime(eta))}]")
                         else:
-                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} MBps, eta : {time.strftime('%H:%M:%S', time.gmtime(eta))}]")
+                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} GBps, eta : {time.strftime('%H:%M:%S', time.gmtime(eta))}]")
                     sys.stdout.flush()
             break
             #await message.download_media(file=f'E:\\telegit\\{filename}')
