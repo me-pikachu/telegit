@@ -1,7 +1,4 @@
-from telethon.tl.patched import Message
 from telethon import TelegramClient
-from telethon.tl.types import DocumentAttributeAudio
-import mimetypes
 import sys
 import time
 import os
