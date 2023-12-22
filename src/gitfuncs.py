@@ -78,9 +78,10 @@ def delete(repo: str, file: str, desc: str, gitoken: str):
     repo = app.get_repo(repo)
     contents = repo.get_contents(file, ref='main')
     commit_status = repo.delete_file(contents.path, desc, contents.sha, branch='main')
+    print(f'Deleted {repo}/{file} successfully!!')
     return commit_status
 
-
-
+#commit_status = delete('me-pikachu/telegit', 'test/lauda69.txt', 'test deletion', '<YOUR TOKEN>')
+#print(commit_status)
 # fromgit('me-pikachu/telegit', 'E:/test clone2/', '<YOUR TOKEN>')
     
