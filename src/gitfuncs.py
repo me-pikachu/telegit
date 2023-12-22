@@ -39,6 +39,7 @@ def togit(path: str, folder: str, filename: str, gitoken: str, repo: str, desc: 
         else:
             repo.create_file(f'{filename}', desc, data, branch='main')
     print(f"File '{filename}' pushed successfully!!")
+    app.close()
 
 # togit("E:/telegit/chatids.txt", 'src/Data', 'chatids.txt', '<YOUR TOKEN>', 'me-pikachu/telegit', 'chatids')
 
@@ -69,6 +70,17 @@ def fromgit(repo: str, path_to_clone_to: str, gitoken: str):
                 os.mkdir(file_handler.getfolder(path_to_save_to))
                 with open(path_to_save_to, 'wb') as file:
                     file.write(file_content.decoded_content)
+
+    app.close()
+
+def delete(repo: str, file: str, desc: str, gitoken: str):
+    app = Github(gitoken)
+    repo = app.get_repo(repo)
+    contents = repo.get_contents(file, ref='main')
+    commit_status = repo.delete_file(contents.path, desc, contents.sha, branch='main')
+    return commit_status
+
+
 
 # fromgit('me-pikachu/telegit', 'E:/test clone2/', '<YOUR TOKEN>')
     
