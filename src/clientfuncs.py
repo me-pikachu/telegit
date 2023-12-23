@@ -32,28 +32,28 @@ def ProgressCallback(sent_bytes, total, t1=time.time()):
         # less than 1MBps
         upload_speed = round(upload_speed*1024 , 2)
         if (eta < 60):
-            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}KBps, eta : {eta}s]")
+            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}KBps, eta : {eta}s]                      ")
         elif (eta<3600):
-            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}KBps, eta : {time.strftime('%M:%S', time.gmtime(eta))}]")
+            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}KBps, eta : {time.strftime('%M:%S', time.gmtime(eta))}s]                      ")
         else:
-            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}KBps, eta : {time.strftime('%H:%M:%S', time.gmtime(eta))}]")
+            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}KBps, eta : {time.strftime('%H:%M:%S', time.gmtime(eta))}s]                      ")
     elif (upload_speed >= 1.0 and upload_speed<1024):
         upload_speed = round(upload_speed, 2)
         if (eta < 60):
-            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}MBps, eta : {eta}s]")
+            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}MBps, eta : {eta}s]                      ")
         elif (eta<3600):
-            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}MBps, eta : {time.strftime('%M:%S', time.gmtime(eta))}]")
+            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}MBps, eta : {time.strftime('%M:%S', time.gmtime(eta))}s]                      ")
         else:
-            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}MBps, eta : {time.strftime('%H:%M:%S', time.gmtime(eta))}]")
+            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}MBps, eta : {time.strftime('%H:%M:%S', time.gmtime(eta))}s]                      ")
 
     elif (upload_speed >= 1024):
         upload_speed = round(upload_speed/1024 , 2)
         if (eta < 60):
-            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}GBps, eta : {eta}s]")
+            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}GBps, eta : {eta}s]                      ")
         elif (eta < 3600):
-            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}GBps, eta : {time.strftime('%M:%S', time.gmtime(eta))}]")
+            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}GBps, eta : {time.strftime('%M:%S', time.gmtime(eta))}s]                      ")
         else:
-            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}GBps, eta : {time.strftime('%H:%M:%S', time.gmtime(eta))}]")
+            sys.stdout.write(f" {round(sent_bytes/total * 100, 2)} %  in {int(t2-t1)}s  [{upload_speed}GBps, eta : {time.strftime('%H:%M:%S', time.gmtime(eta))}s]                      ")
     
     sys.stdout.flush()
 
@@ -95,38 +95,38 @@ async def fromtele(msg_id: int, file_path:str, client=client, chatid = chatid):
                         # speed is less than 1 kbps
                         download_speed = round(download_speed*1024, 2)
                         if (eta < 60):
-                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} bytes persec, eta : {eta}s]")
+                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} bytes persec, eta : {eta}s]                      ")
                         elif (eta < 3600):
-                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} bytes persec, eta : {time.strftime('%M:%S', time.gmtime(eta))}]")
+                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} bytes persec, eta : {time.strftime('%M:%S', time.gmtime(eta))}s]                      ")
                         else:
-                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} bytes persec, eta : {time.strftime('%H:%M:%S', time.gmtime(eta))}]")
+                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} bytes persec, eta : {time.strftime('%H:%M:%S', time.gmtime(eta))}s]                      ")
                     elif (download_speed < 1024):
                         # speed between 1 kbps to 1 mbps
                         download_speed = round(download_speed, 2)
                         if (eta < 60):
-                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} KBps, eta : {eta}s]")
+                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} KBps, eta : {eta}s]                      ")
                         elif (eta < 3600):
-                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} KBps, eta : {time.strftime('%M:%S', time.gmtime(eta))}]")
+                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} KBps, eta : {time.strftime('%M:%S', time.gmtime(eta))}s]                      ")
                         else:
-                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} KBps, eta : {time.strftime('%H:%M:%S', time.gmtime(eta))}]")
+                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} KBps, eta : {time.strftime('%H:%M:%S', time.gmtime(eta))}s]                      ")
                     elif (download_speed < 1024 * 1024):
                         # speed between 1mbps to 1gbps
                         download_speed = round(download_speed/1024, 2)
                         if (eta < 60):
-                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} MBps, eta : {eta}s]")
+                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} MBps, eta : {eta}s]                      ")
                         elif (eta < 3600):
-                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} MBps, eta : {time.strftime('%M:%S', time.gmtime(eta))}]")
+                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} MBps, eta : {time.strftime('%M:%S', time.gmtime(eta))}s]                      ")
                         else:
-                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} MBps, eta : {time.strftime('%H:%M:%S', time.gmtime(eta))}]")
+                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} MBps, eta : {time.strftime('%H:%M:%S', time.gmtime(eta))}s]                      ")
                     else:
                         # speed greater than equal to 1gbps
                         download_speed = round(download_speed/(1024*1024), 2)
                         if (eta < 60):
-                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} GBps, eta : {eta}s]")
+                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} GBps, eta : {eta}s]                      ")
                         elif (eta < 3600):
-                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} GBps, eta : {time.strftime('%M:%S', time.gmtime(eta))}]")
+                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} GBps, eta : {time.strftime('%M:%S', time.gmtime(eta))}s]                      ")
                         else:
-                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} GBps, eta : {time.strftime('%H:%M:%S', time.gmtime(eta))}]")
+                            sys.stdout.write(f" {round((dl/total_size * 100), 2)}%  in {int(t2-t1)}s  [{download_speed} GBps, eta : {time.strftime('%H:%M:%S', time.gmtime(eta))}s]                      ")
                     sys.stdout.flush()
             break
             #await message.download_media(file=f'E:\\telegit\\{filename}')

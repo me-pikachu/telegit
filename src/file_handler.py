@@ -107,6 +107,10 @@ def get_gitfolder(startdir: str, file_path: str):
         return ""
     return dir
 
+def foldername(dir: str):
+    ls = dir.split("\\")
+    return ls[len(ls)-1]
+
 def get_gitloc(startdir: str, file_path: str):
     # gets the git location of a file
     # i.e. removes the start directory from the complete path
@@ -150,17 +154,38 @@ def getfiles(curdir: str):
             files.append(f.path)
     return files
 
-def totalfiles(startdir: str, curdir: str = "", count: int = 0):
+def totalfiles(startdir: str, curdir: str = "", igdir: list = [], count: int = 0):
     # counts the total number of files in a particular directory
     if (curdir == ""):
         curdir = startdir
     
     subdir = getsubdir(curdir)
     for dir in subdir:
-        count = totalfiles(startdir, dir, count)
+        if (foldername(dir) in igdir):
+            pass
+        else:
+            count = totalfiles(startdir, dir, igdir, count)
     
     subfiles = getfiles(curdir)
     count += len(subfiles)
+    return count
+    
+def totalfiles_less_fmaxsize(startdir: str, fmaxsize: int, curdir: str = "", igdir: list = [], count: int = 0):
+    # counts the total number of files in a particular directory
+    if (curdir == ""):
+        curdir = startdir
+    
+    subdir = getsubdir(curdir)
+    for dir in subdir:
+        if (foldername(dir) in igdir):
+            pass
+        else:
+            count = totalfiles_less_fmaxsize(startdir, fmaxsize, dir, igdir, count)
+    
+    subfiles = getfiles(curdir)
+    for files in subfiles:
+        if (getsize(files) < fmaxsize):
+            count += 1
     return count
 
 def comploc(path1: str, path2: str, startdir: str = ""):
