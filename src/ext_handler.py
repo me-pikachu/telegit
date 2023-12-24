@@ -23,7 +23,7 @@ def upcache_dir(startdir: str, curdir: str, cache: dict):
         fdetails["fsize"] = file_handler.getsize(files)
         fdetails["mtime"] = file_handler.getmtime(files)
         fdetails["ctime"] = file_handler.getctime(files)
-        cache[f"{file_handler.get_gitfolder(startdir, files)}\\{file_handler.getfilename(files)}"] = fdetails
+        cache[f"{file_handler.get_gitloc(startdir, files)}"] = fdetails
     
     return cache
 
@@ -151,7 +151,7 @@ def push_dir(startdir: str, curdir: str, cache: dict, igdir: list, curfilenum: i
     # since it is a DFS firstly go to the subdirectories of current directory
     subdir = file_handler.getsubdir(curdir)
     for dir in subdir:
-        if (file_handler.foldername(dir) in igdir):
+        if (file_handler.get_gitloc(startdir, dir) in igdir):
             pass
         else:
             curfilenum = push_dir(startdir, dir, cache, igdir, curfilenum, totfilenum)
@@ -163,11 +163,12 @@ def push_dir(startdir: str, curdir: str, cache: dict, igdir: list, curfilenum: i
         print(f"Checking file '.{file_handler.get_gitloc(startdir, file_path)}'")
         cursize = file_handler.getsize(file_path)
         if (cursize > max_fsize):
-            print(f"The size of the file is greater than {max_fsize/(1024*1024)}MB\nPreparing file for Telegram upload")
-            if (file_path in cache):
-                push_update(startdir, file_path, cache[file_path])
+            print(f"The size of the file is greater than {max_fsize/(1024*1024)}MB")
+            if (file_handler.get_gitloc(startdir, file_path) in cache):
+                push_update(startdir, file_path, cache[file_handler.get_gitloc(startdir,file_path)])
             else:
                 # uploading the file for Telegram
+                print("Cannot locate any saved details of the file.\nPreparing the file for Telegram upload")
                 file_id = clientfuncs.totele(file_path)
 
                 # creating .telegit file for the current file
@@ -272,7 +273,7 @@ while (True):
             print("For Push to git write 'push'. For Pull from git write 'pull'. To get of the working directory write 'close'")
             cmd = str(input())
             if ("push" in cmd):
-                push(startdir, ["Binaries", "Intermediate", "Saved"])
+                push(startdir, ["\\Binaries", "\\Intermediate", "\\Saved"])
             elif (cmd == "pull"):
                 pull(startdir)
             elif (cmd == "close"):

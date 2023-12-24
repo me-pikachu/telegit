@@ -161,7 +161,7 @@ def totalfiles(startdir: str, curdir: str = "", igdir: list = [], count: int = 0
     
     subdir = getsubdir(curdir)
     for dir in subdir:
-        if (foldername(dir) in igdir):
+        if (get_gitloc(startdir, dir) in igdir):
             pass
         else:
             count = totalfiles(startdir, dir, igdir, count)
@@ -177,7 +177,7 @@ def totalfiles_less_fmaxsize(startdir: str, fmaxsize: int, curdir: str = "", igd
     
     subdir = getsubdir(curdir)
     for dir in subdir:
-        if (foldername(dir) in igdir):
+        if (get_gitloc(startdir, dir) in igdir):
             pass
         else:
             count = totalfiles_less_fmaxsize(startdir, fmaxsize, dir, igdir, count)
